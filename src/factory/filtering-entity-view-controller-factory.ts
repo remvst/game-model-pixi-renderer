@@ -2,7 +2,7 @@ import { Entity } from '@remvst/game-model';
 import { EntityViewController } from '../entities/entity-view-controller';
 import { EntityViewControllerFactory } from './entity-view-controller-factory';
 
-export default class FilteringEntityViewControllerFactory implements EntityViewControllerFactory {
+export class FilteringEntityViewControllerFactory implements EntityViewControllerFactory {
 
     constructor(
         private readonly wrapped: EntityViewControllerFactory,

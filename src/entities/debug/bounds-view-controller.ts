@@ -5,7 +5,7 @@ import { Entity } from '@remvst/game-model';
 import { InterpolationPool } from '@remvst/animate.js';
 import { WorldViewController } from '../../world/world-view-controller';
 
-export default class BoundsViewController extends EntityViewController<PIXI.Sprite> {
+export class BoundsViewController extends EntityViewController<PIXI.Sprite> {
     private wrappedViewController: EntityViewController<PIXI.DisplayObject>;
 
     private readonly color = randPick([0xff0000, 0xffff00, 0x0000ff, 0xff00ff, 0x00ffff, 0x00ff00]);

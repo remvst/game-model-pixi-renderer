@@ -4,7 +4,7 @@ import { EntityViewController } from '../entities/entity-view-controller';
 
 import { EntityViewControllerFactory } from './entity-view-controller-factory';
 
-export default class CompositeEntityViewControllerFactory implements EntityViewControllerFactory {
+export class CompositeEntityViewControllerFactory implements EntityViewControllerFactory {
 
     private readonly factories: EntityViewControllerFactory[];
 

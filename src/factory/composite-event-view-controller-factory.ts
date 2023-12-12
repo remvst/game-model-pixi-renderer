@@ -3,7 +3,7 @@ import { World, WorldEvent } from '@remvst/game-model';
 import { EventViewControllerFactory } from './event-view-controller-factory';
 import { EventViewController } from '../events/event-view-controller';
 
-export default class CompositeEventViewControllerFactory implements EventViewControllerFactory {
+export class CompositeEventViewControllerFactory implements EventViewControllerFactory {
 
     private readonly factories: EventViewControllerFactory[];
 

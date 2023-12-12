@@ -1,7 +1,7 @@
 import * as PIXI from 'pixi.js';
 import { EntityViewController } from '../entity-view-controller';
 
-export default class DebugRectangleViewController extends EntityViewController<PIXI.Sprite> {
+export class DebugRectangleViewController extends EntityViewController<PIXI.Sprite> {
     private width: number;
     private height: number;
 
