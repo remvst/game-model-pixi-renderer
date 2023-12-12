@@ -1,0 +1,25 @@
+{
+    "name": "@remvst/game-model-pixi-renderer",
+    "version": "1.0.0",
+    "description": "",
+    "keywords": [],
+    "author": "Rémi Vansteelandt",
+    "license": "UNLICENSED",
+    "main": "lib/index.js",
+    "scripts": {
+        "build": "rm -rf lib && tsc",
+        "prepublishOnly": "npm i && npm run build"
+    },
+    "dependencies": {
+        "@remvst/animate.js": "^2.0.0",
+        "@remvst/game-model": "^4.10.0",
+        "@remvst/geometry": "^2.5.1",
+        "@remvst/optimization": "^1.0.1",
+        "@remvst/random": "^2.0.1",
+        "egd-shared": "file:../shared",
+        "egd-shared-utils": "file:../shared-utils",
+        "pixi.js": "^7.3.2",
+        "rxjs": "^7.8.0",
+        "typescript": "^5.2.2"
+    }
+}
