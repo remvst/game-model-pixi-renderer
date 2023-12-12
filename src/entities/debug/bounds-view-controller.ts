@@ -3,7 +3,7 @@ import { randPick } from '@remvst/random';
 import { EntityViewController } from '../entity-view-controller';
 import { Entity } from '@remvst/game-model';
 import { InterpolationPool } from '@remvst/animate.js';
-import WorldViewController from '../../world/world-view-controller';
+import { WorldViewController } from '../../world/world-view-controller';
 
 export default class BoundsViewController extends EntityViewController<PIXI.Sprite> {
     private wrappedViewController: EntityViewController<PIXI.DisplayObject>;

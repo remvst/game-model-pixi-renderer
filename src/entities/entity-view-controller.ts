@@ -1,10 +1,8 @@
+import * as PIXI from 'pixi.js';
 import { Entity } from '@remvst/game-model';
 import { InterpolationPool } from '@remvst/animate.js';
-import * as PIXI from 'pixi.js';
-
-import WorldViewController from '../world/world-view-controller';
+import { WorldViewController } from '../world/world-view-controller';
 import { ViewController } from '../view-controller';
-
 import { filter } from 'rxjs/operators';
 import { take } from 'rxjs/operators';
 

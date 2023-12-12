@@ -7,7 +7,7 @@ import { ViewController } from '../view-controller';
 import { WorldLayer } from './world-layer';
 import { Subscription } from 'rxjs';
 
-export default class WorldViewController {
+export class WorldViewController {
 
     readonly world: World;
     readonly renderer: PIXI.IRenderer;

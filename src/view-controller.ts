@@ -1,9 +1,8 @@
+import * as PIXI from 'pixi.js';
 import { ReusablePool, ReusablePoolBindable } from '@remvst/optimization';
 import { Rectangle } from '@remvst/geometry';
 import { InterpolationPool } from '@remvst/animate.js';
-import * as PIXI from 'pixi.js';
-
-import WorldViewController from './world/world-view-controller';
+import { WorldViewController } from './world/world-view-controller';
 import { CameraTrait } from '@remvst/game-model';
 
 interface Timeout {

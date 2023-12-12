@@ -1,8 +1,7 @@
+import * as PIXI from 'pixi.js';
 import { WorldEvent } from '@remvst/game-model';
 import { InterpolationPool } from '@remvst/animate.js';
-import * as PIXI from 'pixi.js';
-
-import WorldViewController from '../world/world-view-controller';
+import { WorldViewController } from '../world/world-view-controller';
 import { ViewController } from '../view-controller';
 
 export abstract class EventViewController<ViewType extends PIXI.DisplayObject, EventType extends WorldEvent> extends ViewController<ViewType> {
