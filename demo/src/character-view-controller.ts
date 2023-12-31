@@ -3,7 +3,7 @@ import { Sprite, Texture } from "pixi.js";
 import { CharacterTrait } from "./character-trait";
 
 export class CharacterViewController extends EntityViewController<Sprite> {
-    readonly layerId = 'characters';
+    readonly layerId = "characters";
 
     private characterTrait: CharacterTrait;
 

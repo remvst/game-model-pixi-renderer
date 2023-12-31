@@ -1,9 +1,14 @@
-import { Entity } from '@remvst/game-model';
-import { EntityViewController, EntityViewControllerFactory } from '@remvst/game-model-pixi-renderer';
-import { CharacterTrait } from './character-trait';
-import { CharacterViewController } from './character-view-controller';
+import { Entity } from "@remvst/game-model";
+import {
+    EntityViewController,
+    EntityViewControllerFactory,
+} from "@remvst/game-model-pixi-renderer";
+import { CharacterTrait } from "./character-trait";
+import { CharacterViewController } from "./character-view-controller";
 
-export class TestEntityViewControllerFactory implements EntityViewControllerFactory {
+export class TestEntityViewControllerFactory
+    implements EntityViewControllerFactory
+{
     viewControllersForEntity(entity: Entity): EntityViewController<any>[] {
         const viewControllers: EntityViewController<any>[] = [];
 

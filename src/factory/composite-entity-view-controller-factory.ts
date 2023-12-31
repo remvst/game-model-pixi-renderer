@@ -1,11 +1,12 @@
-import { Entity } from '@remvst/game-model';
+import { Entity } from "@remvst/game-model";
 
-import { EntityViewController } from '../entities/entity-view-controller';
+import { EntityViewController } from "../entities/entity-view-controller";
 
-import { EntityViewControllerFactory } from './entity-view-controller-factory';
+import { EntityViewControllerFactory } from "./entity-view-controller-factory";
 
-export class CompositeEntityViewControllerFactory implements EntityViewControllerFactory {
-
+export class CompositeEntityViewControllerFactory
+    implements EntityViewControllerFactory
+{
     private readonly factories: EntityViewControllerFactory[];
 
     constructor(factories: EntityViewControllerFactory[]) {
@@ -21,4 +22,4 @@ export class CompositeEntityViewControllerFactory implements EntityViewControlle
 
         return viewControllers;
     }
-};
+}

@@ -1,5 +1,5 @@
-import * as PIXI from 'pixi.js';
-import { EntityViewController } from '../entity-view-controller';
+import * as PIXI from "pixi.js";
+import { EntityViewController } from "../entity-view-controller";
 
 export class DebugRectangleViewController extends EntityViewController<PIXI.Sprite> {
     private width: number;
@@ -25,5 +25,5 @@ export class DebugRectangleViewController extends EntityViewController<PIXI.Spri
         view.position.set(this.entity.x, this.entity.y);
     }
 
-    readonly layerId = 'debug-foreground';
+    readonly layerId = "debug-foreground";
 }

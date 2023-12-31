@@ -1,14 +1,13 @@
-import * as PIXI from 'pixi.js';
-import { World, Entity, WorldEvent, CameraTrait } from '@remvst/game-model';
-import { InterpolationPool } from '@remvst/animate.js';
-import { EntityViewControllerFactory } from '../factory/entity-view-controller-factory';
-import { EventViewControllerFactory } from '../factory/event-view-controller-factory';
-import { ViewController } from '../view-controller';
-import { WorldLayer } from './world-layer';
-import { Subscription } from 'rxjs';
+import { InterpolationPool } from "@remvst/animate.js";
+import { CameraTrait, Entity, World, WorldEvent } from "@remvst/game-model";
+import * as PIXI from "pixi.js";
+import { Subscription } from "rxjs";
+import { EntityViewControllerFactory } from "../factory/entity-view-controller-factory";
+import { EventViewControllerFactory } from "../factory/event-view-controller-factory";
+import { ViewController } from "../view-controller";
+import { WorldLayer } from "./world-layer";
 
 export class WorldViewController {
-
     readonly world: World;
     readonly renderer: PIXI.IRenderer;
     readonly entityViewControllerFactory: EntityViewControllerFactory;
@@ -19,7 +18,10 @@ export class WorldViewController {
     private cachedCamera: CameraTrait;
 
     private readonly viewControllers: ViewController<any>[] = [];
-    private readonly collapsableViewControllers = new Map<string, ViewController<any>>();
+    private readonly collapsableViewControllers = new Map<
+        string,
+        ViewController<any>
+    >();
 
     readonly view = new PIXI.Container();
     private readonly layers = new Map<string, PIXI.Container>();
@@ -27,12 +29,12 @@ export class WorldViewController {
     age: number = 0;
 
     constructor(options: {
-        world: World,
-        entityViewControllerFactory: EntityViewControllerFactory,
-        eventViewControllerFactory: EventViewControllerFactory,
-        interpolationPool: InterpolationPool,
-        renderer: PIXI.IRenderer,
-        layers: string[],
+        world: World;
+        entityViewControllerFactory: EntityViewControllerFactory;
+        eventViewControllerFactory: EventViewControllerFactory;
+        interpolationPool: InterpolationPool;
+        renderer: PIXI.IRenderer;
+        layers: string[];
     }) {
         this.world = options.world;
         this.renderer = options.renderer;
@@ -53,7 +55,7 @@ export class WorldViewController {
                 this.cachedCamera = camera.traitOfType(CameraTrait)!;
                 return this.cachedCamera;
             }
-            throw new Error('No camera found');
+            throw new Error("No camera found");
         }
         return this.cachedCamera;
     }
@@ -63,10 +65,14 @@ export class WorldViewController {
 
         // Adding removing view controllers when entities are updated
         this.subscriptions = [
-            this.world.chunked.entities.additions.subscribe((entity) => this.entityAdded(entity)),
+            this.world.chunked.entities.additions.subscribe((entity) =>
+                this.entityAdded(entity),
+            ),
             this.world.events.subscribe((event) => this.onEvent(event)),
-        ]
-        this.world.chunked.entities.forEach((entity) => this.entityAdded(entity));
+        ];
+        this.world.chunked.entities.forEach((entity) =>
+            this.entityAdded(entity),
+        );
     }
 
     update(elapsed: number) {
@@ -99,11 +105,7 @@ export class WorldViewController {
         this.entityViewControllerFactory
             .viewControllersForEntity(entity)
             .forEach((viewController) => {
-                viewController.bind(
-                    this,
-                    this.interpolationPool,
-                    entity,
-                );
+                viewController.bind(this, this.interpolationPool, entity);
                 viewController.postBind();
 
                 this.addViewController(viewController);
@@ -114,11 +116,7 @@ export class WorldViewController {
         this.eventViewControllerFactory
             .viewControllersForEvent(event, this.world)
             .forEach((viewController) => {
-                viewController.bind(
-                    this,
-                    this.interpolationPool,
-                    event,
-                );
+                viewController.bind(this, this.interpolationPool, event);
                 viewController.postBind();
 
                 this.addViewController(viewController);

@@ -1,17 +1,19 @@
-import * as PIXI from 'pixi.js';
-import { randPick } from '@remvst/random';
-import { EntityViewController } from '../entity-view-controller';
-import { Entity } from '@remvst/game-model';
-import { InterpolationPool } from '@remvst/animate.js';
-import { WorldViewController } from '../../world/world-view-controller';
+import { InterpolationPool } from "@remvst/animate.js";
+import { Entity } from "@remvst/game-model";
+import { randPick } from "@remvst/random";
+import * as PIXI from "pixi.js";
+import { WorldViewController } from "../../world/world-view-controller";
+import { EntityViewController } from "../entity-view-controller";
 
 export class BoundsViewController extends EntityViewController<PIXI.Sprite> {
     private wrappedViewController: EntityViewController<PIXI.DisplayObject>;
 
-    private readonly color = randPick([0xff0000, 0xffff00, 0x0000ff, 0xff00ff, 0x00ffff, 0x00ff00]);
+    private readonly color = randPick([
+        0xff0000, 0xffff00, 0x0000ff, 0xff00ff, 0x00ffff, 0x00ff00,
+    ]);
 
     constructor(
-        wrappedViewController: EntityViewController<PIXI.DisplayObject>
+        wrappedViewController: EntityViewController<PIXI.DisplayObject>,
     ) {
         super();
         this.wrappedViewController = wrappedViewController;
@@ -29,7 +31,11 @@ export class BoundsViewController extends EntityViewController<PIXI.Sprite> {
         entity: Entity,
     ) {
         super.bind(worldViewController, interpolationPool, entity);
-        this.wrappedViewController.bind(worldViewController, interpolationPool, entity);
+        this.wrappedViewController.bind(
+            worldViewController,
+            interpolationPool,
+            entity,
+        );
     }
 
     postBind() {
@@ -47,8 +53,10 @@ export class BoundsViewController extends EntityViewController<PIXI.Sprite> {
         view.position.set(rectangle.x, rectangle.y);
         view.width = rectangle.width;
         view.height = rectangle.height;
-        view.tint = this.wrappedViewController.isVisible() ? this.color : 0xff0000;
+        view.tint = this.wrappedViewController.isVisible()
+            ? this.color
+            : 0xff0000;
     }
 
-    readonly layerId = 'debug-foreground';
+    readonly layerId = "debug-foreground";
 }

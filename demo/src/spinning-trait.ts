@@ -1,7 +1,7 @@
 import { Trait, Vector2 } from "@remvst/game-model";
 
 export class SpinningTrait extends Trait {
-    static readonly key = 'spinning';
+    static readonly key = "spinning";
     readonly key = SpinningTrait.key;
 
     constructor(

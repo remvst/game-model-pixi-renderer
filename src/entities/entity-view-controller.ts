@@ -1,13 +1,13 @@
-import * as PIXI from 'pixi.js';
-import { Entity } from '@remvst/game-model';
-import { InterpolationPool } from '@remvst/animate.js';
-import { WorldViewController } from '../world/world-view-controller';
-import { ViewController } from '../view-controller';
-import { filter } from 'rxjs/operators';
-import { take } from 'rxjs/operators';
+import { InterpolationPool } from "@remvst/animate.js";
+import { Entity } from "@remvst/game-model";
+import * as PIXI from "pixi.js";
+import { filter, take } from "rxjs/operators";
+import { ViewController } from "../view-controller";
+import { WorldViewController } from "../world/world-view-controller";
 
-export abstract class EntityViewController<ViewType extends PIXI.DisplayObject> extends ViewController<ViewType> {
-
+export abstract class EntityViewController<
+    ViewType extends PIXI.DisplayObject,
+> extends ViewController<ViewType> {
     protected entity: Entity | null = null;
 
     bind(
@@ -28,12 +28,10 @@ export abstract class EntityViewController<ViewType extends PIXI.DisplayObject> 
     }
 
     async removeEmitter(): Promise<void> {
-        await this.entity!.world!.chunked.entities.removals
-            .pipe(
-                filter((entity) => entity === this.entity),
-                take(1)
-            )
-            .toPromise();
+        await this.entity!.world!.chunked.entities.removals.pipe(
+            filter((entity) => entity === this.entity),
+            take(1),
+        ).toPromise();
     }
 
     prepareForReuse() {
@@ -45,4 +43,4 @@ export abstract class EntityViewController<ViewType extends PIXI.DisplayObject> 
     protected isEntityRelevant() {
         return this.entity!.world?.isEntityEnabled(this.entity!);
     }
-};
+}

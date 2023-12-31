@@ -1,9 +1,9 @@
-import { Container, autoDetectRenderer } from 'pixi.js';
-import { WorldViewController } from '@remvst/game-model-pixi-renderer';
-import { InterpolationPool } from '@remvst/animate.js';
-import EmptyEventViewControllerFactory from '../../lib/factory/empty-event-view-controller-factory';
-import { TestEntityViewControllerFactory } from './test-entity-view-controller-factory';
-import { testWorld } from './test-world';
+import { InterpolationPool } from "@remvst/animate.js";
+import { WorldViewController } from "@remvst/game-model-pixi-renderer";
+import { Container, autoDetectRenderer } from "pixi.js";
+import EmptyEventViewControllerFactory from "../../lib/factory/empty-event-view-controller-factory";
+import { TestEntityViewControllerFactory } from "./test-entity-view-controller-factory";
+import { testWorld } from "./test-world";
 
 const world = testWorld();
 
@@ -23,7 +23,7 @@ const worldViewController = new WorldViewController({
     interpolationPool,
     entityViewControllerFactory,
     eventViewControllerFactory,
-    layers: ['characters', 'debug-foreground'],
+    layers: ["characters", "debug-foreground"],
 });
 stage.addChild(worldViewController.view);
 worldViewController.start();
@@ -44,7 +44,7 @@ function frame() {
     requestAnimationFrame(frame);
 }
 
-window.addEventListener('load', async () => {
+window.addEventListener("load", async () => {
     document.body.appendChild(renderer.view as HTMLCanvasElement);
     frame();
 });

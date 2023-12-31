@@ -1,17 +1,18 @@
-import * as PIXI from 'pixi.js';
-import { ReusablePool, ReusablePoolBindable } from '@remvst/optimization';
-import { Rectangle } from '@remvst/geometry';
-import { InterpolationPool } from '@remvst/animate.js';
-import { WorldViewController } from './world/world-view-controller';
-import { CameraTrait } from '@remvst/game-model';
+import { InterpolationPool } from "@remvst/animate.js";
+import { CameraTrait } from "@remvst/game-model";
+import { Rectangle } from "@remvst/geometry";
+import { ReusablePool, ReusablePoolBindable } from "@remvst/optimization";
+import * as PIXI from "pixi.js";
+import { WorldViewController } from "./world/world-view-controller";
 
 interface Timeout {
     age: number;
     action: () => void;
 }
 
-export abstract class ViewController<ViewType extends PIXI.DisplayObject> implements ReusablePoolBindable {
-
+export abstract class ViewController<ViewType extends PIXI.DisplayObject>
+    implements ReusablePoolBindable
+{
     protected view: ViewType | null = null;
     protected worldViewController: WorldViewController | null = null;
     protected interpolationPool: InterpolationPool | null = null;
@@ -27,7 +28,10 @@ export abstract class ViewController<ViewType extends PIXI.DisplayObject> implem
     pool: ReusablePool<this>;
 
     protected get age(): number {
-        return this.worldViewController!.age - this.worldViewControllerAgeAtCreation;
+        return (
+            this.worldViewController!.age -
+            this.worldViewControllerAgeAtCreation
+        );
     }
 
     protected get camera(): CameraTrait {
@@ -43,8 +47,7 @@ export abstract class ViewController<ViewType extends PIXI.DisplayObject> implem
         this.worldViewControllerAgeAtCreation = worldViewController.age;
     }
 
-    postBind() {
-    }
+    postBind() {}
 
     protected abstract createView(): ViewType;
 
@@ -53,7 +56,9 @@ export abstract class ViewController<ViewType extends PIXI.DisplayObject> implem
     abstract get layerId(): string;
 
     isVisible(): boolean {
-        return this.visibilityRectangle.intersects(this.camera.visibleRectangle);
+        return this.visibilityRectangle.intersects(
+            this.camera.visibleRectangle,
+        );
     }
 
     hasView(): boolean {
@@ -78,7 +83,10 @@ export abstract class ViewController<ViewType extends PIXI.DisplayObject> implem
 
     protected installView() {
         if (this.view) {
-            this.worldViewController!.addViewControllerView(this.view, this.layerId);
+            this.worldViewController!.addViewControllerView(
+                this.view,
+                this.layerId,
+            );
         }
     }
 
@@ -120,14 +128,13 @@ export abstract class ViewController<ViewType extends PIXI.DisplayObject> implem
             this.updateView(view, elapsed);
         }
 
-        for (let i = this.timeouts.length - 1 ; i >= 0 ; i-- ) {
+        for (let i = this.timeouts.length - 1; i >= 0; i--) {
             if (this.timeouts[i].age <= this.age) {
                 const { action } = this.timeouts[i];
                 this.timeouts.splice(i, 1);
                 action();
             }
         }
-
 
         this.lastUpdate = this.age;
     }
@@ -153,13 +160,15 @@ export abstract class ViewController<ViewType extends PIXI.DisplayObject> implem
         }
     }
 
-    abstract removeEmitter(): Promise<void>
+    abstract removeEmitter(): Promise<void>;
 
     protected whenAgeIs(targetAge: number): Promise<void> {
-        return new Promise((resolve) => this.timeouts.push({
-            'age': targetAge,
-            'action': resolve,
-        }));
+        return new Promise((resolve) =>
+            this.timeouts.push({
+                age: targetAge,
+                action: resolve,
+            }),
+        );
     }
 
     prepareForReuse() {
