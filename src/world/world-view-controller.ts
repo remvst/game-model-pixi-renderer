@@ -35,7 +35,6 @@ export class WorldViewController {
         interpolationPool: InterpolationPool;
         renderer: PIXI.IRenderer;
         layers: string[];
-        createLayer: (layer: string) => PIXI.Container;
     }) {
         this.world = options.world;
         this.renderer = options.renderer;
@@ -44,12 +43,14 @@ export class WorldViewController {
         this.interpolationPool = options.interpolationPool;
 
         for (const layerId of options.layers) {
-            const layer = options.createLayer
-                ? options.createLayer(layerId)
-                : new PIXI.Container();
+            const layer = this.createLayer(layerId);
             this.layers.set(layerId, layer);
             this.view.addChild(layer);
         }
+    }
+
+    protected createLayer(layerId: WorldLayer): PIXI.Container {
+        return new PIXI.Container();
     }
 
     get camera(): CameraTrait {
@@ -66,7 +67,7 @@ export class WorldViewController {
     start() {
         this.destroy();
 
-        // Adding removing view controllers when entities are updated
+        // Adding/removing view controllers when entities are updated
         this.subscriptions = [
             this.world.chunked.entities.additions.subscribe((entity) =>
                 this.entityAdded(entity),
