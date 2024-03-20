@@ -35,6 +35,7 @@ export class WorldViewController {
         interpolationPool: InterpolationPool;
         renderer: PIXI.IRenderer;
         layers: string[];
+        createLayer: (layer: string) => PIXI.Container;
     }) {
         this.world = options.world;
         this.renderer = options.renderer;
@@ -43,7 +44,9 @@ export class WorldViewController {
         this.interpolationPool = options.interpolationPool;
 
         for (const layerId of options.layers) {
-            const layer = new PIXI.Container();
+            const layer = options.createLayer
+                ? options.createLayer(layerId)
+                : new PIXI.Container();
             this.layers.set(layerId, layer);
             this.view.addChild(layer);
         }
@@ -138,7 +141,7 @@ export class WorldViewController {
     }
 
     addViewControllerView(view: PIXI.DisplayObject, layerId: WorldLayer) {
-        const layer = this.layers.get(layerId);
+        const layer = this.provideLayer(layerId);
         if (!layer) {
             window.console.error(`Invalid layer ID: ${layerId}`);
             return;
