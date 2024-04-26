@@ -1,6 +1,6 @@
 {
     "name": "@remvst/game-model-pixi-renderer",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "description": "",
     "keywords": [],
     "author": "Rémi Vansteelandt",
@@ -14,20 +14,19 @@
         "test": "npm run prettier:check && npm run build"
     },
     "dependencies": {
-        "@remvst/animate.js": "^3.0.0",
-        "@remvst/game-model": "^4.10.0",
+        "@remvst/animate.js": "^3.1.0",
+        "@remvst/game-model": "^4.20.0",
         "@remvst/geometry": "^2.5.1",
         "@remvst/optimization": "^1.0.1",
         "@remvst/random": "^2.0.1",
         "rxjs": "^7.8.0"
     },
     "peerDependencies": {
-        "pixi.js": "^7.3.2"
+        "pixi.js": "^7.x"
     },
     "devDependencies": {
-        "pixi.js-legacy": "^7.3.2",
-        "prettier": "3.1.1",
+        "prettier": "^3.2.5",
         "prettier-plugin-organize-imports": "^3.2.4",
-        "typescript": "^5.2.2"
+        "typescript": "^5.4.5"
     }
 }
