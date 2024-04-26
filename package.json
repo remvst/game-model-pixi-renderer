@@ -11,7 +11,7 @@
         "prettier:check": "prettier . --check",
         "build": "rm -rf lib && tsc",
         "prepublishOnly": "npm i && npm run build",
-        "test": "npm run build"
+        "test": "npm run prettier:check && npm run build"
     },
     "dependencies": {
         "@remvst/animate.js": "^3.0.0",
