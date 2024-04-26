@@ -1,5 +1,5 @@
 {
-    "name": "@remvst/client-inputs-demo",
+    "name": "@remvst/game-model-pixi-renderer-demo",
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
@@ -22,7 +22,7 @@
     },
     "dependencies": {
         "@remvst/game-model-pixi-renderer": "file:..",
-        "pixi.js": "^7.3.2",
+        "pixi.js-legacy": "^7.3.2",
         "ts-loader": "^9.2.6",
         "typescript": "^5.2.2"
     }
