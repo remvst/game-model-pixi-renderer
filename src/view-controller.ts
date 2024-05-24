@@ -140,22 +140,17 @@ export abstract class ViewController<ViewType extends PIXI.DisplayObject>
     }
 
     tearDown() {
-        if (this.pool) {
-            this.prepareForReuse();
-        } else if (this.view) {
+        if (this.view) {
             this.destroyView(this.view);
         }
+        this.pool?.give(this);
     }
 
     protected destroyView(view: ViewType) {
-        this.hideView(view);
-
         this.viewAdded = false;
         this.viewCreated = false;
         this.view = null;
-    }
 
-    protected hideView(view: ViewType) {
         view.removeFromParent();
 
         // Give the view back to its pool (if any)
@@ -171,15 +166,6 @@ export abstract class ViewController<ViewType extends PIXI.DisplayObject>
                 action: resolve,
             }),
         );
-    }
-
-    prepareForReuse() {
-        this.timeouts = [];
-        this.viewAdded = false;
-        if (this.view) {
-            this.hideView(this.view);
-        }
-        this.pool.give(this);
     }
 
     readonly collapseGroup: string | null = null;
