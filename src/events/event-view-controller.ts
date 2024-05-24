@@ -30,8 +30,8 @@ export abstract class EventViewController<
         );
     }
 
-    prepareForReuse() {
-        super.prepareForReuse();
+    tearDown() {
+        super.tearDown();
         this.event = null;
     }
 

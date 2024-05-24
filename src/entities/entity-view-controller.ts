@@ -34,8 +34,8 @@ export abstract class EntityViewController<
         ).toPromise();
     }
 
-    prepareForReuse() {
-        super.prepareForReuse();
+    tearDown() {
+        super.tearDown();
         this.entity = null;
         this.lastUpdate = 0;
     }
