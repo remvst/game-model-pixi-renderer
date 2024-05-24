@@ -4,9 +4,7 @@ import * as PIXI from "pixi.js";
 import { WorldViewController } from "../../world/world-view-controller";
 import { EntityViewController } from "../entity-view-controller";
 
-const COLORS = [
-    0xff0000, 0xffff00, 0x0000ff, 0xff00ff, 0x00ffff, 0x00ff00,
-];
+const COLORS = [0xff0000, 0xffff00, 0x0000ff, 0xff00ff, 0x00ffff, 0x00ff00];
 
 export class BoundsViewController extends EntityViewController<PIXI.Sprite> {
     private wrappedViewController: EntityViewController<PIXI.DisplayObject>;
