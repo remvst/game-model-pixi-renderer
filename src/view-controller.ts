@@ -148,19 +148,18 @@ export abstract class ViewController<ViewType extends PIXI.DisplayObject>
     }
 
     protected destroyView(view: ViewType) {
+        this.hideView(view);
+
         this.viewAdded = false;
         this.viewCreated = false;
         this.view = null;
-        view.parent?.removeChild(view);
-
-        // Give the view back to its pool (if any)
-        (view as unknown as ReusablePoolBindable).pool?.give(view);
     }
 
     protected hideView(view: ViewType) {
-        if (view.parent) {
-            view.parent.removeChild(view);
-        }
+        view.removeFromParent();
+
+        // Give the view back to its pool (if any)
+        (view as unknown as ReusablePoolBindable).pool?.give(view);
     }
 
     abstract removeEmitter(): Promise<void>;
@@ -178,14 +177,7 @@ export abstract class ViewController<ViewType extends PIXI.DisplayObject>
         this.timeouts = [];
         this.viewAdded = false;
         if (this.view) {
-            const viewPool = (this.view as unknown as ReusablePoolBindable).pool;
-            if (viewPool)  {
-                // If the view has a pool, destroyView() will give it the view back,
-                // and it can be requested later in createView()'s implementation.
-                this.destroyView(this.view);
-            } else {
-                this.hideView(this.view);
-            }
+            this.hideView(this.view);
         }
         this.pool.give(this);
     }
