@@ -13,15 +13,11 @@
         "prepublishOnly": "npm i && npm run build",
         "test": "npm run prettier:check && npm run build"
     },
-    "dependencies": {
+    "peerDependencies": {
         "@remvst/animate.js": "^3.1.0",
         "@remvst/game-model": "^4.20.0",
         "@remvst/geometry": "^2.5.1",
         "@remvst/optimization": "^1.0.1",
-        "@remvst/random": "^2.0.1",
-        "rxjs": "^7.8.0"
-    },
-    "peerDependencies": {
         "pixi.js": "^7.x"
     },
     "devDependencies": {
