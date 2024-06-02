@@ -1,5 +1,8 @@
 import { InterpolationPool } from "@remvst/animate.js";
-import { WorldViewController, EmptyEventViewControllerFactory } from "@remvst/game-model-pixi-renderer";
+import {
+    EmptyEventViewControllerFactory,
+    WorldViewController,
+} from "@remvst/game-model-pixi-renderer";
 import { Container, autoDetectRenderer } from "pixi.js";
 import "pixi.js-legacy";
 import { TestEntityViewControllerFactory } from "./test-entity-view-controller-factory";
