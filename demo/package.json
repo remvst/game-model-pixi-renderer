@@ -3,8 +3,10 @@
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
+    "sideEffects": false,
     "scripts": {
         "build": "webpack --config webpack.dev.js",
+        "sizetest": "webpack --config webpack.sizetest.js",
         "start": "npm --prefix .. run build && webpack serve --open --config webpack.dev.js"
     },
     "author": "",
@@ -16,6 +18,7 @@
         "clean-webpack-plugin": "^4.0.0",
         "html-webpack-plugin": "^5.6.0",
         "webpack": "^5.91.0",
+        "webpack-bundle-analyzer": "^4.10.1",
         "webpack-cli": "^5.1.4",
         "webpack-dev-server": "^5.0.4",
         "webpack-merge": "^5.8.0"

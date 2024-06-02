@@ -27,6 +27,8 @@ module.exports = {
             "pixi.js": path.resolve("./node_modules/pixi.js"),
             "pixi.js-legacy": path.resolve("./node_modules/pixi.js-legacy"),
         },
+        conditionNames: ['es2015', 'import'],
+        mainFields: ['es2015', 'module', 'main'],
     },
     module: {
         rules: [
@@ -34,7 +36,11 @@ module.exports = {
                 test: /\.ts$/,
                 use: "ts-loader",
                 exclude: /node_modules/,
-            },
+            }, {
+                test: /node_modules/,
+                exclude: /(pixi.js|@pixi)/,
+                sideEffects: false
+            }, 
         ],
     },
 };
