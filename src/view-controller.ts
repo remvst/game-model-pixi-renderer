@@ -143,6 +143,10 @@ export abstract class ViewController<ViewType extends PIXI.DisplayObject>
         if (this.view) {
             this.destroyView(this.view);
         }
+        
+        this.viewAdded = false;
+        this.viewCreated = false;
+
         this.pool?.give(this);
     }
 

@@ -1,6 +1,6 @@
 {
     "name": "@remvst/game-model-pixi-renderer",
-    "version": "1.4.0",
+    "version": "1.4.1",
     "author": "Rémi Vansteelandt",
     "license": "UNLICENSED",
     "main": "lib/cjs/index.js",
