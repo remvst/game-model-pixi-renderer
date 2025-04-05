@@ -5,9 +5,9 @@ import { ReusablePool, ReusablePoolBindable } from "@remvst/optimization";
 import * as PIXI from "pixi.js";
 import { WorldViewController } from "./world/world-view-controller";
 
-interface Timeout {
-    age: number;
-    action: () => void;
+interface Resolvable {
+    resolve: () => void;
+    shouldResolve: () => boolean;
 }
 
 export abstract class ViewController<ViewType extends PIXI.DisplayObject>
@@ -23,7 +23,7 @@ export abstract class ViewController<ViewType extends PIXI.DisplayObject>
     protected visibleAge: number = 0;
     readonly visibilityRectangle = new Rectangle(0, 0, 0, 0);
     protected lastVisible = 0;
-    private timeouts: Timeout[] = [];
+    private readonly resolvables: Resolvable[] = [];
 
     pool: ReusablePool<this>;
 
@@ -45,6 +45,7 @@ export abstract class ViewController<ViewType extends PIXI.DisplayObject>
         this.worldViewController = worldViewController;
         this.interpolationPool = interpolationPool;
         this.worldViewControllerAgeAtCreation = worldViewController.age;
+        this.resolvables.splice(0, this.resolvables.length);
     }
 
     postBind() {}
@@ -128,11 +129,11 @@ export abstract class ViewController<ViewType extends PIXI.DisplayObject>
             this.updateView(view, elapsed);
         }
 
-        for (let i = this.timeouts.length - 1; i >= 0; i--) {
-            if (this.timeouts[i].age <= this.age) {
-                const { action } = this.timeouts[i];
-                this.timeouts.splice(i, 1);
-                action();
+        for (let i = this.resolvables.length - 1; i >= 0; i--) {
+            if (this.resolvables[i].shouldResolve()) {
+                const { resolve } = this.resolvables[i];
+                this.resolvables.splice(i, 1);
+                resolve();
             }
         }
 
@@ -164,11 +165,12 @@ export abstract class ViewController<ViewType extends PIXI.DisplayObject>
     abstract removeEmitter(): Promise<void>;
 
     protected whenAgeIs(targetAge: number): Promise<void> {
+        return this.when(() => this.age >= targetAge);
+    }
+
+    protected when(shouldResolve: () => boolean): Promise<void> {
         return new Promise((resolve) =>
-            this.timeouts.push({
-                age: targetAge,
-                action: resolve,
-            }),
+            this.resolvables.push({ shouldResolve, resolve }),
         );
     }
 
