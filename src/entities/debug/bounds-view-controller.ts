@@ -7,6 +7,7 @@ import { EntityViewController } from "../entity-view-controller";
 const COLORS = [0xff0000, 0xffff00, 0x0000ff, 0xff00ff, 0x00ffff, 0x00ff00];
 
 export class BoundsViewController extends EntityViewController<PIXI.Sprite> {
+    readonly layerId = "debug-foreground";
     private wrappedViewController: EntityViewController<PIXI.DisplayObject>;
 
     private readonly color = COLORS[Math.floor(Math.random() * COLORS.length)];
@@ -57,5 +58,12 @@ export class BoundsViewController extends EntityViewController<PIXI.Sprite> {
             : 0xff0000;
     }
 
-    readonly layerId = "debug-foreground";
+    tearDown(): void {
+        this.wrappedViewController.tearDown();
+        super.tearDown();
+    }
+
+    removeEmitter(): Promise<void> {
+        return this.wrappedViewController.removeEmitter();
+    }
 }
