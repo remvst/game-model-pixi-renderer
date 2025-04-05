@@ -1,6 +1,6 @@
 import { InterpolationPool } from "@remvst/animate.js";
 import { CameraTrait, Entity, World, WorldEvent } from "@remvst/game-model";
-import * as PIXI from "pixi.js";
+import { Container, DisplayObject, IRenderer } from "pixi.js";
 import { Subscription } from "rxjs";
 import { EntityViewControllerFactory } from "../factory/entity-view-controller-factory";
 import { EventViewControllerFactory } from "../factory/event-view-controller-factory";
@@ -9,7 +9,7 @@ import { WorldLayer } from "./world-layer";
 
 export class WorldViewController {
     readonly world: World;
-    readonly renderer: PIXI.IRenderer;
+    readonly renderer: IRenderer;
     readonly entityViewControllerFactory: EntityViewControllerFactory;
     private readonly eventViewControllerFactory: EventViewControllerFactory;
     private readonly interpolationPool: InterpolationPool;
@@ -23,8 +23,8 @@ export class WorldViewController {
         ViewController<any>
     >();
 
-    readonly view = new PIXI.Container();
-    private readonly layers = new Map<string, PIXI.Container>();
+    readonly view = new Container();
+    private readonly layers = new Map<string, Container>();
 
     age: number = 0;
 
@@ -33,7 +33,7 @@ export class WorldViewController {
         entityViewControllerFactory: EntityViewControllerFactory;
         eventViewControllerFactory: EventViewControllerFactory;
         interpolationPool: InterpolationPool;
-        renderer: PIXI.IRenderer;
+        renderer: IRenderer;
         layers: string[];
     }) {
         this.world = options.world;
@@ -49,8 +49,8 @@ export class WorldViewController {
         }
     }
 
-    protected createLayer(layerId: WorldLayer): PIXI.Container {
-        return new PIXI.Container();
+    protected createLayer(layerId: WorldLayer): Container {
+        return new Container();
     }
 
     get camera(): CameraTrait {
@@ -141,7 +141,7 @@ export class WorldViewController {
         viewController.tearDown();
     }
 
-    addViewControllerView(view: PIXI.DisplayObject, layerId: WorldLayer) {
+    addViewControllerView(view: DisplayObject, layerId: WorldLayer) {
         const layer = this.provideLayer(layerId);
         if (!layer) {
             window.console.error(`Invalid layer ID: ${layerId}`);
@@ -151,7 +151,7 @@ export class WorldViewController {
         layer.addChild(view);
     }
 
-    provideLayer(layerId: WorldLayer): PIXI.Container {
+    provideLayer(layerId: WorldLayer): Container {
         if (!this.layers.has(layerId)) {
             throw new Error(`Unknown layer ${layerId}`);
         }

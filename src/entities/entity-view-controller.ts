@@ -1,12 +1,12 @@
 import { InterpolationPool } from "@remvst/animate.js";
 import { Entity } from "@remvst/game-model";
-import * as PIXI from "pixi.js";
+import { DisplayObject } from "pixi.js";
 import { filter, take } from "rxjs/operators";
 import { ViewController } from "../view-controller";
 import { WorldViewController } from "../world/world-view-controller";
 
 export abstract class EntityViewController<
-    ViewType extends PIXI.DisplayObject,
+    ViewType extends DisplayObject,
 > extends ViewController<ViewType> {
     protected entity: Entity | null = null;
 

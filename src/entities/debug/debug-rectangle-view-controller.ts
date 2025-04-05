@@ -1,7 +1,7 @@
-import * as PIXI from "pixi.js";
+import { Sprite, Texture } from "pixi.js";
 import { EntityViewController } from "../entity-view-controller";
 
-export class DebugRectangleViewController extends EntityViewController<PIXI.Sprite> {
+export class DebugRectangleViewController extends EntityViewController<Sprite> {
     private width: number;
     private height: number;
 
@@ -11,8 +11,8 @@ export class DebugRectangleViewController extends EntityViewController<PIXI.Spri
         this.height = height;
     }
 
-    createView(): PIXI.Sprite {
-        const view = new PIXI.Sprite(PIXI.Texture.WHITE);
+    createView(): Sprite {
+        const view = new Sprite(Texture.WHITE);
         view.width = this.width;
         view.height = this.height;
         view.anchor.set(0.5);
@@ -21,7 +21,7 @@ export class DebugRectangleViewController extends EntityViewController<PIXI.Spri
         return view;
     }
 
-    updateView(view: PIXI.Sprite) {
+    updateView(view: Sprite) {
         view.position.set(this.entity.x, this.entity.y);
     }
 

@@ -2,7 +2,7 @@ import { InterpolationPool } from "@remvst/animate.js";
 import { CameraTrait } from "@remvst/game-model";
 import { Rectangle } from "@remvst/geometry";
 import { ReusablePool, ReusablePoolBindable } from "@remvst/optimization";
-import * as PIXI from "pixi.js";
+import { DisplayObject } from "pixi.js";
 import { WorldViewController } from "./world/world-view-controller";
 
 interface Resolvable {
@@ -10,7 +10,7 @@ interface Resolvable {
     shouldResolve: () => boolean;
 }
 
-export abstract class ViewController<ViewType extends PIXI.DisplayObject>
+export abstract class ViewController<ViewType extends DisplayObject>
     implements ReusablePoolBindable
 {
     protected view: ViewType | null = null;

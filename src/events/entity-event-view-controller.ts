@@ -1,9 +1,9 @@
 import { Entity, EntityEvent, EntityEventProcessed } from "@remvst/game-model";
-import * as PIXI from "pixi.js";
+import { DisplayObject } from "pixi.js";
 import { EventViewController } from "./event-view-controller";
 
 export abstract class EntityEventViewController<
-    ViewType extends PIXI.DisplayObject,
+    ViewType extends DisplayObject,
     EntityEventType extends EntityEvent,
 > extends EventViewController<ViewType, EntityEventProcessed> {
     protected entity: Entity;
