@@ -1,26 +1,24 @@
 import { InterpolationPool } from "@remvst/animate.js";
 import { Entity } from "@remvst/game-model";
-import * as PIXI from "pixi.js";
+import { DisplayObject, Sprite, Texture } from "pixi.js";
 import { WorldViewController } from "../../world/world-view-controller";
 import { EntityViewController } from "../entity-view-controller";
 
 const COLORS = [0xff0000, 0xffff00, 0x0000ff, 0xff00ff, 0x00ffff, 0x00ff00];
 
-export class BoundsViewController extends EntityViewController<PIXI.Sprite> {
+export class BoundsViewController extends EntityViewController<Sprite> {
     readonly layerId = "debug-foreground";
-    private wrappedViewController: EntityViewController<PIXI.DisplayObject>;
+    private wrappedViewController: EntityViewController<DisplayObject>;
 
     private readonly color = COLORS[Math.floor(Math.random() * COLORS.length)];
 
-    constructor(
-        wrappedViewController: EntityViewController<PIXI.DisplayObject>,
-    ) {
+    constructor(wrappedViewController: EntityViewController<DisplayObject>) {
         super();
         this.wrappedViewController = wrappedViewController;
     }
 
-    createView(): PIXI.Sprite {
-        const view = new PIXI.Sprite(PIXI.Texture.WHITE);
+    createView(): Sprite {
+        const view = new Sprite(Texture.WHITE);
         view.alpha = 0.2;
         return view;
     }
@@ -48,7 +46,7 @@ export class BoundsViewController extends EntityViewController<PIXI.Sprite> {
         super.update();
     }
 
-    updateView(view: PIXI.Sprite) {
+    updateView(view: Sprite) {
         const rectangle = this.wrappedViewController.visibilityRectangle;
         view.position.set(rectangle.x, rectangle.y);
         view.width = rectangle.width;
